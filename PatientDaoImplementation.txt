@@ -1,0 +1,81 @@
+package com.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import com.entity.patient;
+
+public class patientdaoimplementation implements patientdao
+{
+	public List<patient> viewpatient() throws ClassNotFoundException, SQLException{
+		ArrayList<patient>patientlist=new ArrayList<patient>();
+        Class.forName("com.mysql.jdbc.Driver");
+        //create the connection
+        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sample","root","Kavi@123");
+        //create the statement
+        PreparedStatement ps=con.prepareStatement("select * from patient");
+        ResultSet rs=ps.executeQuery();
+		
+		while(rs.next())
+        {
+            patient p=new patient();
+                p.setAdmitNo(rs.getInt(1));
+                p.setPatientname(rs.getString(2));
+                p.setDiseasename(rs.getString(3));
+                p.setAddress(rs.getString(4));
+                p.setCno(rs.getLong(5));
+                patientlist.add(p);
+          }
+		return patientlist;
+	}
+
+	@Override
+	public List<patient> insertpatient(patient p) throws ClassNotFoundException, SQLException {
+		List<patient> patientlist=new ArrayList<patient>();
+		Class.forName("com.mysql.jdbc.Driver");
+        //create the connection
+        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sample","root","Kavi@123");
+        //create the statement
+        PreparedStatement ps=con.prepareStatement("Insert into patient values (?,?,?,?,?)");
+        ps.setInt(1, p.getAdmitNo());
+        ps.setString(2, p.getPatientname());
+        ps.setString(3, p.getDiseasename());
+        ps.setString(4, p.getAddress());
+        ps.setLong(5, p.getCno());
+        ps.executeUpdate();
+		return patientlist;
+		
+	}
+
+	@Override
+	public void updatepatient(patient p) throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
+        //create the connection
+        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sample","root","Kavi@123");
+        //create the statement
+        PreparedStatement ps=con.prepareStatement("update patient set patientname=?,diseasename=?,Address=?,Cno=? where AdmitNo=?");
+        ps.setString(1, p.getPatientname());
+        ps.setString(2, p.getDiseasename());
+        ps.setString(3,p.getAddress());
+        ps.setLong(4, p.getCno());
+        ps.setInt(5,p.getAdmitNo());
+        ps.executeUpdate();
+	}
+
+	@Override
+	public void deletepatientrecords(patient p) throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
+		//create the connection
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sample","root","Kavi@123");
+		//create the statement
+		PreparedStatement ps=con.prepareStatement("delete from patient where AdmitNo=?");
+		ps.setInt(1, p.getAdmitNo());
+		ps.executeUpdate();
+		
+	}
+
+}

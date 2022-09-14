@@ -1,0 +1,53 @@
+package com.entity;
+
+public class patient {
+		private int AdmitNo;
+		private String patientname;
+		private String diseasename;
+		private String Address;
+		private long Cno;
+		public patient()
+		{
+			
+		}
+		public patient(int AdmitNo, String patientname, String diseasename, String Address, long Cno) {
+			super();
+			this.AdmitNo = AdmitNo;
+			this.patientname = patientname;
+			this.diseasename = diseasename;
+			this.Address = Address;
+			this.Cno = Cno;
+			
+		}
+		public int getAdmitNo() {
+			return AdmitNo;
+		}
+		public void setAdmitNo(int admitNo) {
+			AdmitNo = admitNo;
+		}
+		public String getPatientname() {
+			return patientname;
+		}
+		public void setPatientname(String patientname) {
+			this.patientname = patientname;
+		}
+		public String getDiseasename() {
+			return diseasename;
+		}
+		public void setDiseasename(String diseasename) {
+			this.diseasename = diseasename;
+		}
+		public String getAddress() {
+			return Address;
+		}
+		public void setAddress(String address) {
+			Address = address;
+		}
+		public long getCno() {
+			return Cno;
+		}
+		public void setCno(long cno) {
+			Cno = cno;
+		}
+		
+}

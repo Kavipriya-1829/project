@@ -1,0 +1,44 @@
+package view;
+
+import java.sql.SQLException;
+import java.util.Scanner;
+import com.service.patientservice;
+public class patientmain {
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		String s;
+		System.out.println("Hospital Management System");
+		System.out.println("1.View Data");
+		System.out.println("2.Insert Data");
+		System.out.println("3.Update Data");
+		System.out.println("4.delete Data");
+		do
+		{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter the choice");
+		
+			int choice =sc.nextInt();
+			switch(choice)
+			{
+			case 1:
+				new patientservice().viewdetails();
+				break;
+			case 2:
+				new patientservice().insertpatientdetails();
+				break;
+			case 3:
+				new patientservice().updatepatientdetails();
+				break;
+			case 4:
+				new patientservice().deletepatientrecords();
+				break;
+			}
+				System.out.println("do u want to continue");
+				s=sc.next();
+			
+
+	}
+
+		while(s.equals("yes"));
+	}
+}

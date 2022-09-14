@@ -1,0 +1,13 @@
+package com.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.entity.patient;
+
+public interface patientdao {
+	public List<patient>viewpatient() throws ClassNotFoundException, SQLException;
+	public List<patient> insertpatient(patient p) throws ClassNotFoundException, SQLException;
+	public void updatepatient(patient p) throws SQLException, ClassNotFoundException;
+	public void deletepatientrecords(patient p) throws SQLException, ClassNotFoundException;
+}

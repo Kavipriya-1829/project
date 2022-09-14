@@ -1,0 +1,71 @@
+package com.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Scanner;
+import com.dao.patientdaoimplementation;
+import com.entity.patient;
+
+public class patientservice {
+		public void viewdetails() throws ClassNotFoundException, SQLException
+		{
+			List<patient>patientlist=new patientdaoimplementation().viewpatient();
+			for(patient p:patientlist)
+			{
+				
+				System.out.print(p.getAdmitNo()+'\t');
+				System.out.print(p.getPatientname()+'\t');
+				System.out.print(p.getDiseasename()+'\t');
+				System.out.println(p.getAddress()+'\t');
+				System.out.println(p.getCno()+'\t');
+			}
+		}
+		public void insertpatientdetails() throws ClassNotFoundException, SQLException {
+			Scanner sc=new Scanner(System.in);
+			System.out.println("enter the AdmitNo");
+			int AdmitNo=sc.nextInt();
+			System.out.println("enter the patient name");
+			String patientname=sc.next();
+			System.out.println("enter the disease name");
+			String diseasename=sc.next();
+			System.out.println("enter the Address");
+			String Address=sc.next();
+			System.out.println("enter the contact no");
+			Long Cno=sc.nextLong();
+			patient p=new patient();
+			p.setAdmitNo(AdmitNo);
+			p.setPatientname(patientname);
+			p.setDiseasename(diseasename);
+			p.setAddress(Address);
+			p.setCno(Cno);
+			new patientdaoimplementation().insertpatient(p);
+		}
+	public void updatepatientdetails() throws ClassNotFoundException, SQLException {
+			Scanner sc=new Scanner(System.in);
+			System.out.println("enter the Patient Name");
+			String patientname=sc.next();
+			System.out.println("enter the Disease Name");
+			String diseasename=sc.next();
+			System.out.println("enter the Address");
+			String Address=sc.next();
+			System.out.println("enter Contact No");
+			Long Cno=sc.nextLong();
+			System.out.println("enter the AdmitNo");
+			int AdmitNo=sc.nextInt();
+			patient p=new patient();
+			p.setPatientname(patientname);
+			p.setDiseasename(diseasename);
+			p.setAddress(Address);
+			p.setCno(Cno);
+			p.setAdmitNo(AdmitNo);
+			new patientdaoimplementation().updatepatient(p);
+	}
+	public void deletepatientrecords() throws ClassNotFoundException, SQLException {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter the AdmitNo");
+		int AdmitNo=sc.nextInt();
+	     patient p=new patient();
+	     p.setAdmitNo(AdmitNo);
+		new patientdaoimplementation().deletepatientrecords(p);
+	}
+}
